@@ -4,9 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homebookkeping"
-        mc:Ignorable="d" Height="450" Width="800">
+        mc:Ignorable="d" Height="450" Width="532" Loaded="Window_Loaded">
     <Grid>
-        <TextBox x:Name="TextBoxOfTransactins" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="424" Width="705" IsReadOnly="True"/>
+
+        <DataGrid x:Name="dgOfTransactins" HorizontalAlignment="Center" IsReadOnly="True" Margin="0,46,0,0" VerticalAlignment="Top" Height="378" Width="512" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата" Binding="{Binding adding_date}"/>
+                <DataGridTextColumn Header="Тип" Binding="{Binding type}"/>
+                <DataGridTextColumn Header="Категория" Binding="{Binding category}"/>
+                <DataGridTextColumn Header="Сумма" Binding="{Binding price}"/>
+                <DataGridTextColumn Header="Комментарий" Binding="{Binding comment}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">
+            <TextBlock Text="За весь период"/>
+            <TextBlock Text="За текущий месяц"/>
+        </ComboBox>
 
     </Grid>
 </Window>

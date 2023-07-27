@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -74,10 +75,12 @@ namespace Homebookkeping
             public string category { get; set; } = "";
             public override string ToString() => $"{category}";
         }
+        List<string> itemsIncome = new List<string>();
+        itemsIncome.Add("Продукты питания");
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            cbTypeTransactions.SelectedIndex = 0;
+            Close();
         }
     }
 }

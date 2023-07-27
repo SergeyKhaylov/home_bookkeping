@@ -4,27 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homebookkeping"
-        mc:Ignorable="d" Height="415" Width="631" Loaded="Window_Loaded" Title="Добавить прихо/расход">
+        mc:Ignorable="d" Height="447" Width="335" Title="Добавить прихо/расход" ResizeMode="NoResize">
     <Grid>
-        <Button x:Name="ButtonSave" Content="Добавить" HorizontalAlignment="Left" Margin="493,63,0,0" VerticalAlignment="Top" Height="22" Width="105" Click="ButtonSave_Click"/>
+        <Button x:Name="ButtonSave" Content="OK" HorizontalAlignment="Left" Margin="28,360,0,0" VerticalAlignment="Top" Height="25" Width="100" Click="ButtonSave_Click"/>
 
-        <Label Content="Дата" HorizontalAlignment="Left" Margin="54,30,0,0" VerticalAlignment="Top"/>
+        <Label Content="Дата" HorizontalAlignment="Left" Margin="18,19,0,0" VerticalAlignment="Top"/>
 
-        <Label Content="Приход/расход" HorizontalAlignment="Left" Margin="28,127,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbTypeTransactions" HorizontalAlignment="Left" Margin="28,174,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbTypeTransactions_SelectionChanged">
+        <Label Content="Приход/расход" HorizontalAlignment="Left" Margin="18,63,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbTypeTransactions" HorizontalAlignment="Left" Margin="121,66,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbTypeTransactions_SelectionChanged">
             <TextBlock Text="Доход" />
             <TextBlock Text="Расход"/>
         </ComboBox>
 
-        <Label Content="Категория" HorizontalAlignment="Left" Margin="32,217,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbCategoryTransaction" HorizontalAlignment="Left" Margin="32,260,0,0" VerticalAlignment="Top" Width="120" IsSynchronizedWithCurrentItem="True"/>
+        <Label Content="Категория" HorizontalAlignment="Left" Margin="18,115,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbCategoryTransaction" HorizontalAlignment="Left" Margin="121,117,0,0" VerticalAlignment="Top" Width="181" IsSynchronizedWithCurrentItem="True"/>
 
-        <Label Content="Сумма" HorizontalAlignment="Left" Margin="32,305,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbPrice" HorizontalAlignment="Left" Margin="32,352,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Сумма" HorizontalAlignment="Left" Margin="18,160,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbPrice" HorizontalAlignment="Left" Margin="121,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
-        <Label Content="Комментарий" HorizontalAlignment="Left" Margin="241,66,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbComment" HorizontalAlignment="Left" Margin="241,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="357" Height="264"/>
-        <DatePicker x:Name="datePicker" HorizontalAlignment="Left" Margin="32,76,0,0" VerticalAlignment="Top" Text="02.02.2023"/>
+        <Label Content="Комментарий" HorizontalAlignment="Left" Margin="18,222,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbComment" HorizontalAlignment="Left" Margin="121,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="131"/>
+        <DatePicker x:Name="datePicker" HorizontalAlignment="Left" Margin="121,19,0,0" VerticalAlignment="Top" Text="02.02.2023"/>
+        <Button Content="Отмена" HorizontalAlignment="Left" Margin="202,360,0,0" VerticalAlignment="Top" Height="25" Width="100" Click="Button_Click"/>
 
     </Grid>
 </Window>

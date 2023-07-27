@@ -5,12 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homebookkeping"
         mc:Ignorable="d"
-        Title="Домашняя Бухгалтерия" Height="380" Width="612" Loaded="Window_Loaded">
+        Title="Домашняя Бухгалтерия" Height="295" Width="236" Loaded="Window_Loaded" ResizeMode="NoResize">
     <Grid>
-        <Button x:Name="ShowTransactionsMonth" Content="Приход/расход&#xD;&#xA; за текущий месяц" HorizontalAlignment="Left" Margin="73,258,0,0" VerticalAlignment="Top" Height="50" Width="160" Click="ShowTransactionsMonth_Click"/>
-        <Button x:Name="ButtonAdd" Content="Добавить приход/расход" HorizontalAlignment="Left" Margin="73,57,0,0" VerticalAlignment="Top" Height="50" Width="160" Click="ButtonAdd_Click"/>
-        <Button x:Name="ShowTransactions" Content="Приход/расход&#xD;&#xA; за всё время" HorizontalAlignment="Left" Margin="382,258,0,0" VerticalAlignment="Top" Height="50" Width="160" Click="ShowTransactions_Click"/>
-        <TextBox x:Name="lShowSum" HorizontalAlignment="Left" Margin="382,57,0,0" VerticalAlignment="Top" Height="54" Width="160" IsReadOnly="True" TextWrapping="WrapWithOverflow"/>
+        <Button x:Name="ButtonAdd" Content="Добавить приход/расход" HorizontalAlignment="Left" Margin="34,114,0,0" VerticalAlignment="Top" Height="35" Width="160" Click="ButtonAdd_Click"/>
+        <Button x:Name="ShowTransactions" Content="Статистика" HorizontalAlignment="Left" Margin="34,184,0,0" VerticalAlignment="Top" Height="35" Width="160" Click="ShowTransactions_Click"/>
+        <TextBox x:Name="lShowSum" HorizontalAlignment="Left" TextAlignment="Center" Margin="34,34,0,0" VerticalAlignment="Top" Height="54" Width="160" IsReadOnly="True" TextWrapping="WrapWithOverflow"/>
 
     </Grid>
 </Window>

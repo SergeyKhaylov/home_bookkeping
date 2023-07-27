@@ -15,34 +15,13 @@ namespace Homebookkeping
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
-        private void ShowTransactionsMonth_Click(object sender, RoutedEventArgs e)
-        {
-            ShowTransactionMonth(false);
-        }
-
         private void ShowTransactions_Click(object sender, RoutedEventArgs e)
-        {
-            ShowTransactionMonth(true);
-        }
-        void ShowTransactionMonth (bool  showMonth)
         {
             ListOfTrsnsactions listOfTransactions = new ListOfTrsnsactions();
 
             listOfTransactions.Owner = this;
 
             listOfTransactions.Show();
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                var transaction = db.transactions.OrderBy(p => p.adding_date).ToList();
-                int d = DateTime.Now.Day;
-                DateOnly dateOnly = DateOnly.FromDateTime(DateTime.Now);
-                dateOnly = dateOnly.AddDays(-d);
-                foreach (Transaction u in transaction)
-                {
-                    if (u.adding_date > dateOnly || showMonth)
-                        listOfTransactions.TextBoxOfTransactins.Text += ($"{u.adding_date} {u.type} {u.category} {u.price} {u.comment} \n");
-                }
-            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -53,7 +32,7 @@ namespace Homebookkeping
                 int d = DateTime.Now.Day;
                 DateOnly dateOnly = DateOnly.FromDateTime(DateTime.Now);
                 dateOnly = dateOnly.AddDays(-d);
-                int sum = 0;
+                double sum = 0;
                 string tr = "";
                 foreach (Transaction u in transaction)
                 {
@@ -77,6 +56,7 @@ namespace Homebookkeping
 
             addTransaction.Show();
             addTransaction.datePicker.Text = DateOnly.FromDateTime(DateTime.Now).ToString();
+            addTransaction.cbTypeTransactions.SelectedIndex = 0;
         }
     }
 }
