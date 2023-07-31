@@ -11,10 +11,25 @@ namespace Homebookkeping
         {
             InitializeComponent();
         }
+        List<string> incomeCategory = new List<string>()
+        {
+            "Заработная плата",
+            "Доход со сдачи в аренду недвижимости",
+            "Иные доходы"
+        };
+        List<string> expenseCategory = new List<string>()
+        {
+            "Продукты питания",
+            "Транспорт",
+            "Мобильная связь",
+            "Интернет",
+            "Развлечения",
+            "Другое"
+        };
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if(double.TryParse(tbPrice.Text, out double priceValue))
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
@@ -23,7 +38,7 @@ namespace Homebookkeping
                     {
                         type = cbTypeTransactions.Text,
                         category = cbCategoryTransaction.Text,
-                        price = Convert.ToInt32(tbPrice.Text),
+                        price = priceValue,
                         comment = tbComment.Text,
                         adding_date = DateOnly.Parse(datePicker.Text)
                     };
@@ -35,10 +50,11 @@ namespace Homebookkeping
                     db.transactions.Add(transaction);
                     db.SaveChanges();
                 }
+
                 MessageBox.Show("Данные успешно введены");
                 Close();
             }
-            catch
+            else
             {
                 tbPrice.Text = "";
                 MessageBox.Show("Данные введены некорректно");
@@ -49,35 +65,13 @@ namespace Homebookkeping
         {
             if(cbTypeTransactions.SelectedIndex == 0) 
             {
-                cbCategoryTransaction.ItemsSource = new itemCategory[]
-                {
-                    new itemCategory{category= "Заработная плата" },
-                    new itemCategory{category= "Дохода с сдачи в аренду недвижимости" },
-                    new itemCategory{category= "Иные доходы" },
-
-                };
+                cbCategoryTransaction.ItemsSource = incomeCategory;
             }
             else if (cbTypeTransactions .SelectedIndex == 1)
             {
-                cbCategoryTransaction.ItemsSource = new itemCategory[]
-               {
-                   new itemCategory { category = "Продукты питания" },
-                   new itemCategory { category = "Транспорт" },
-                   new itemCategory { category = "Мобильная связь" },
-                   new itemCategory { category = "Интернет" },
-                   new itemCategory { category = "Развлечения" },
-                   new itemCategory { category = "Другое" }
-               };
+                cbCategoryTransaction.ItemsSource = expenseCategory;
             }
         }
-        public class itemCategory
-        {
-            public string category { get; set; } = "";
-            public override string ToString() => $"{category}";
-        }
-        List<string> itemsIncome = new List<string>();
-        itemsIncome.Add("Продукты питания");
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();

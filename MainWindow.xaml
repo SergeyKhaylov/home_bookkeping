@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homebookkeping"
         mc:Ignorable="d"
-        Title="Домашняя Бухгалтерия" Height="295" Width="236" Loaded="Window_Loaded" ResizeMode="NoResize">
+        Title="Домашняя Бухгалтерия" Height="297" Width="246" ResizeMode="NoResize" Activated="Window_Activated">
     <Grid>
         <Button x:Name="ButtonAdd" Content="Добавить приход/расход" HorizontalAlignment="Left" Margin="34,114,0,0" VerticalAlignment="Top" Height="35" Width="160" Click="ButtonAdd_Click"/>
         <Button x:Name="ShowTransactions" Content="Статистика" HorizontalAlignment="Left" Margin="34,184,0,0" VerticalAlignment="Top" Height="35" Width="160" Click="ShowTransactions_Click"/>

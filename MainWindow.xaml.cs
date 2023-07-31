@@ -14,24 +14,12 @@ namespace Homebookkeping
             InitializeComponent();
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
-
-        private void ShowTransactions_Click(object sender, RoutedEventArgs e)
-        {
-            ListOfTrsnsactions listOfTransactions = new ListOfTrsnsactions();
-
-            listOfTransactions.Owner = this;
-
-            listOfTransactions.Show();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void ShowSum()
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var transaction = db.transactions.OrderBy(p => p.adding_date).ToList();
-                int d = DateTime.Now.Day;
-                DateOnly dateOnly = DateOnly.FromDateTime(DateTime.Now);
-                dateOnly = dateOnly.AddDays(-d);
+                var transaction = db.transactions.ToList();
+                DateOnly dateOnly = DateOnly.FromDateTime(DateTime.Now.AddDays(-DateTime.Now.Day));
                 double sum = 0;
                 string tr = "";
                 foreach (Transaction u in transaction)
@@ -40,12 +28,23 @@ namespace Homebookkeping
                         sum += u.price;
                 }
                 if (sum != 0)
-                    if(sum > 0)
+                {
+                    if (sum > 0)
                         tr = "Приход";
                     else if (sum < 0)
                         tr = "Расход";
-                lShowSum.Text = $"{tr} за текущий месяц {sum}";
+                    lShowSum.Text = $"{tr} за текущий месяц {sum}";
+                }
             }
+        }
+
+        private void ShowTransactions_Click(object sender, RoutedEventArgs e)
+        {
+            ListOfTrsnsactions listOfTransactions = new ListOfTrsnsactions();
+
+            listOfTransactions.Owner = this;
+
+            listOfTransactions.Show();
         }
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
@@ -57,6 +56,11 @@ namespace Homebookkeping
             addTransaction.Show();
             addTransaction.datePicker.Text = DateOnly.FromDateTime(DateTime.Now).ToString();
             addTransaction.cbTypeTransactions.SelectedIndex = 0;
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            ShowSum();
         }
     }
 }

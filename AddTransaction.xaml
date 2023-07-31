@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homebookkeping"
-        mc:Ignorable="d" Height="447" Width="335" Title="Добавить прихо/расход" ResizeMode="NoResize">
+        mc:Ignorable="d" Height="447" Width="348" Title="Добавить прихо/расход" ResizeMode="NoResize">
     <Grid>
         <Button x:Name="ButtonSave" Content="OK" HorizontalAlignment="Left" Margin="28,360,0,0" VerticalAlignment="Top" Height="25" Width="100" Click="ButtonSave_Click"/>
 
@@ -25,7 +25,7 @@
         <Label Content="Комментарий" HorizontalAlignment="Left" Margin="18,222,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbComment" HorizontalAlignment="Left" Margin="121,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="181" Height="131"/>
         <DatePicker x:Name="datePicker" HorizontalAlignment="Left" Margin="121,19,0,0" VerticalAlignment="Top" Text="02.02.2023"/>
-        <Button Content="Отмена" HorizontalAlignment="Left" Margin="202,360,0,0" VerticalAlignment="Top" Height="25" Width="100" Click="Button_Click"/>
+        <Button Content="Отмена" HorizontalAlignment="Left" Margin="181,360,0,0" VerticalAlignment="Top" Height="25" Width="100" Click="Button_Click"/>
 
     </Grid>
 </Window>
