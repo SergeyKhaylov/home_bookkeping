@@ -1,0 +1,10 @@
+﻿namespace Homebookkeping
+{
+    internal class Category
+    {
+        public int id { get; set; }
+        public string? name { get; set; }
+        public int type { get; set;}
+        public int user_id { get; set; }
+    }
+}

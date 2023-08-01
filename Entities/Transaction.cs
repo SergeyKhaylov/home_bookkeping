@@ -10,5 +10,6 @@ namespace Homebookkeping
         public double price { get; set; }
         public string? comment { get; set; }
         public DateOnly adding_date { get; set; }
+        public int user_id { get; set; }
     }
 }

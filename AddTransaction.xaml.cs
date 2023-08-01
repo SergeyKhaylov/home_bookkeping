@@ -7,9 +7,11 @@ namespace Homebookkeping
 {
     public partial class AddTransaction : Window
     {
-        public AddTransaction()
+        int? _userId;
+        public AddTransaction(int? userId)
         {
             InitializeComponent();
+            _userId = userId;
         }
         List<string> incomeCategory = new List<string>()
         {
@@ -33,7 +35,6 @@ namespace Homebookkeping
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    // создаем два объекта User
                     Transaction transaction = new Transaction
                     {
                         type = cbTypeTransactions.Text,

@@ -6,15 +6,13 @@ using System.Windows.Controls;
 
 namespace Homebookkeping
 {
-    /// <summary>
-    /// Логика взаимодействия для ListOfTrsnsactions.xaml
-    /// </summary>
     public partial class ListOfTrsnsactions : Window 
     {
-        
-        public ListOfTrsnsactions()
+        private int? _userId;
+        public ListOfTrsnsactions(int? userId)
         {
             InitializeComponent();
+            _userId = userId;
         }
         private List<Transaction> GetTransactions()
         {
@@ -48,6 +46,7 @@ namespace Homebookkeping
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(_userId.ToString());
             Transaction? transaction = dgOfTransactins.SelectedItem as Transaction;
             if (transaction != null)
             {

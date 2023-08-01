@@ -8,6 +8,8 @@ namespace Homebookkeping
         {
             Database.EnsureCreated();
         }
+        public DbSet<User> users { get; set; } = null!;
+        public DbSet<Category> categories { get; set; } = null!;
         public DbSet<Transaction> transactions { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
