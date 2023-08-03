@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Homebookkeping.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Homebookkeping
 {

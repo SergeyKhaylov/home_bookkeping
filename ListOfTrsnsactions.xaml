@@ -16,11 +16,9 @@
                 <DataGridTextColumn Header="Комментарий" Binding="{Binding comment}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboBox_SelectionChanged">
-            <TextBlock Text="За весь период"/>
-            <TextBlock Text="За текущий месяц"/>
-        </ComboBox>
         <Button Content="Удалить" HorizontalAlignment="Left" Height="22" Margin="356,10,0,0" VerticalAlignment="Top" Width="85" Click="Button_Click"/>
+        <DatePicker x:Name="dpStart" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" SelectedDateChanged="dpStart_SelectedDateChanged" IsTodayHighlighted="False"/>
+        <DatePicker x:Name="dpEnd" HorizontalAlignment="Left" Margin="126,9,0,0" VerticalAlignment="Top" SelectedDateChanged="dpStart_SelectedDateChanged"/>
 
     </Grid>
 </Window>

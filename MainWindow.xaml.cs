@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using Homebookkeping.Entities;
 
 namespace Homebookkeping
 {
     public partial class MainWindow : Window
     {
-        public int? _userId = 2;
+        public int
+            _userId = 0;
         bool _isLogined = false;
         public MainWindow()
         {
@@ -56,8 +58,6 @@ namespace Homebookkeping
             addTransaction.Owner = this;
 
             addTransaction.Show();
-            addTransaction.datePicker.Text = DateOnly.FromDateTime(DateTime.Now).ToString();
-            addTransaction.cbTypeTransactions.SelectedIndex = 0;
         }
 
         private void Window_Activated(object sender, EventArgs e)
@@ -70,14 +70,14 @@ namespace Homebookkeping
             using (ApplicationContext db = new ApplicationContext())
             {
                 User user = new User()
-                { user_name = tbUserName.Text, password = tbPass.Text };
+                { user_name = tbUserName.Text, password = tbPass.Password };
                 List<User> users = db.users.Where(u => u.user_name == user.user_name && u.password == user.password).ToList();
 
                 if (tbUserName.Text.Length == 0)
                 {
                     MessageBox.Show("Введите логин");
                 }
-                else if (tbPass.Text.Length == 0)
+                else if (tbPass.Password.Length == 0)
                 {
                     MessageBox.Show("Введите пароль");
                 }
@@ -88,12 +88,12 @@ namespace Homebookkeping
                 else
                 {
                     user = users[0];
-                    MessageBox.Show($"Вы успешно вошли {user.id}");
                     _userId = user.id;
                     _isLogined = true;
                     Login();
                 }
             }
+            ShowSum();
         }
         private void Login()
         {
@@ -106,18 +106,18 @@ namespace Homebookkeping
             using (ApplicationContext db = new ApplicationContext())
             {
                 User user = new User()
-                { user_name = tbUserName.Text, password = tbPass.Text };
+                { user_name = tbUserName.Text, password = tbPass.Password };
                 List<User> users = db.users.Where(u => u.user_name == user.user_name).ToList();
 
                 if (tbUserName.Text.Length == 0)
                 {
                     MessageBox.Show("Введите логин");
                 }
-                else if (tbPass.Text.Length == 0)
+                else if (tbPass.Password.Length == 0)
                 {
                     MessageBox.Show("Введите пароль");
                 }
-                else if (tbPass.Text.Length < 8)
+                else if (tbPass.Password.Length < 8)
                 {
                     MessageBox.Show("Пароль должен быть длинее 8 символов");
                 }
@@ -136,6 +136,7 @@ namespace Homebookkeping
                     _isLogined = true;
                     Login();
                 }
+                ShowSum();
             }
 
         }
@@ -143,6 +144,8 @@ namespace Homebookkeping
         private void btnSignOut_Click(object sender, RoutedEventArgs e)
         {
             _isLogined = false;
+            tbUserName.Text = "";
+            tbPass.Password = "";
             gMain.Visibility = Visibility.Collapsed;
             gRegist.Visibility = Visibility.Visible;
         }

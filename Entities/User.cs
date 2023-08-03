@@ -1,4 +1,4 @@
-﻿namespace Homebookkeping
+﻿namespace Homebookkeping.Entities
 {
     internal class User
     {

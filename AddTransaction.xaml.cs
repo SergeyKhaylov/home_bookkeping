@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -7,27 +8,39 @@ namespace Homebookkeping
 {
     public partial class AddTransaction : Window
     {
-        int? _userId;
-        public AddTransaction(int? userId)
+        int _userId;
+        List<string> _incomeCategory = new List<string>();
+        List<string> _expenseCategory = new List<string>();
+
+        public AddTransaction(int userId)
         {
             InitializeComponent();
             _userId = userId;
+
         }
-        List<string> incomeCategory = new List<string>()
+        private void Window_Activated(object sender, EventArgs e)
         {
-            "Заработная плата",
-            "Доход со сдачи в аренду недвижимости",
-            "Иные доходы"
-        };
-        List<string> expenseCategory = new List<string>()
+            updateCategory();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            "Продукты питания",
-            "Транспорт",
-            "Мобильная связь",
-            "Интернет",
-            "Развлечения",
-            "Другое"
-        };
+            cbTypeTransactions.SelectedIndex = 0;
+            datePicker.Text = DateOnly.FromDateTime(DateTime.Now).ToString();
+        }
+        void updateCategory()
+        {
+            using(ApplicationContext db = new ApplicationContext())
+            {
+                _incomeCategory.Clear();
+                _expenseCategory.Clear();
+                foreach (var c in db.categories.Where(c => c.user_id == _userId).ToList())
+                    if(c.type == "Приход")
+                        _incomeCategory.Add(c.category_name);
+                    else
+                        _expenseCategory.Add(c.category_name);
+            }
+        }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
@@ -35,19 +48,20 @@ namespace Homebookkeping
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
+
                     Transaction transaction = new Transaction
                     {
                         type = cbTypeTransactions.Text,
-                        category = cbCategoryTransaction.Text,
+                        category_id = db.categories.Where(c => c.user_id == _userId && c.category_name == cbCategoryTransaction.Text).ToList()[0].id,
                         price = priceValue,
                         comment = tbComment.Text,
-                        adding_date = DateOnly.Parse(datePicker.Text)
+                        adding_date = DateOnly.Parse(datePicker.Text),
+                        user_id = _userId
                     };
                     transaction.price = Math.Abs(transaction.price);
                     if (cbTypeTransactions.SelectedIndex == 1)
                         transaction.price *= -1;
 
-                    // добавляем их в бд
                     db.transactions.Add(transaction);
                     db.SaveChanges();
                 }
@@ -66,16 +80,23 @@ namespace Homebookkeping
         {
             if(cbTypeTransactions.SelectedIndex == 0) 
             {
-                cbCategoryTransaction.ItemsSource = incomeCategory;
+                cbCategoryTransaction.ItemsSource = _incomeCategory;
             }
             else if (cbTypeTransactions .SelectedIndex == 1)
             {
-                cbCategoryTransaction.ItemsSource = expenseCategory;
+                cbCategoryTransaction.ItemsSource = _expenseCategory;
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void bEditCategory_Click(object sender, RoutedEventArgs e)
+        {
+            EditCategories editCategories = new EditCategories(_userId);
+            editCategories.Owner = this;
+            editCategories.Show();
         }
     }
 }
