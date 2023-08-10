@@ -41,7 +41,7 @@ namespace Homebookkeping
                 {
                     MessageBox.Show("Введите название категории");
                 }
-                else if (db.categories.Where(c => c.category_name == category.category_name && c.type == category.type).ToList().Count > 0)
+                else if (db.categories.Where(c => c.user_id == _userId && c.category_name == category.category_name && c.type == category.type).ToList().Count > 0)
                 {
                     MessageBox.Show("Такая категория уже существует");
                 }

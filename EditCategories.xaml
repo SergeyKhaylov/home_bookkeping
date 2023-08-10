@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homebookkeping"
-        mc:Ignorable="d"
-        Title="EditCategories" Height="430" Width="330" Loaded="Window_Loaded">
+        mc:Ignorable="d" Height="430" Width="330" Loaded="Window_Loaded" Title="Категории">
     <Grid>
         <Grid x:Name="gShowCategory" Visibility="Visible">
             <Menu>
