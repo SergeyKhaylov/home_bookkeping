@@ -4,21 +4,38 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homebookkeping"
-        mc:Ignorable="d" Height="450" Width="532" Loaded="Window_Loaded" Title="Домашняя бухгалтерия">
-    <Grid>
+        mc:Ignorable="d" Height="450" Width="532" Loaded="Window_Loaded" Title="Домашняя бухгалтерия" ResizeMode="NoResize">
 
-        <DataGrid x:Name="dgOfTransactins" HorizontalAlignment="Center" IsReadOnly="True" Margin="0,46,0,0" VerticalAlignment="Top" Height="378" Width="512" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Дата" Binding="{Binding adding_date}"/>
-                <DataGridTextColumn Header="Тип" Binding="{Binding type}"/>
-                <DataGridTextColumn Header="Категория" Binding="{Binding category}"/>
-                <DataGridTextColumn Header="Сумма" Binding="{Binding price}"/>
-                <DataGridTextColumn Header="Комментарий" Binding="{Binding comment}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Content="Удалить" HorizontalAlignment="Left" Height="22" Margin="356,10,0,0" VerticalAlignment="Top" Width="85" Click="Button_Click"/>
-        <DatePicker x:Name="dpStart" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" SelectedDateChanged="dpStart_SelectedDateChanged" IsTodayHighlighted="False"/>
-        <DatePicker x:Name="dpEnd" HorizontalAlignment="Left" Margin="126,9,0,0" VerticalAlignment="Top" SelectedDateChanged="dpStart_SelectedDateChanged"/>
+    <Grid Margin="0,0,0,0">
+        <Menu>
+            <MenuItem Header="Вид" Width="40" Height="20">
+                <MenuItem x:Name="MSortYear" Header="Статистика за год" Click="MSortYear_Click"/>
+                <MenuItem x:Name="MSortRange" Header="Статистика за период" Click="MSortRange_Click"/>
+            </MenuItem>
+        </Menu>
+        <Grid x:Name="GYear" Margin="0,0,0,0">
+            <Label Content="Год" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
+            <DataGrid x:Name="dgOfMonth" HorizontalAlignment="Center" IsReadOnly="True" Margin="0,65,0,0" VerticalAlignment="Top" Height="359" Width="512" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Месяц" Binding="{Binding Month}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBox x:Name="TbYear" HorizontalAlignment="Left" Margin="65,30,0,0" TextWrapping="Wrap" Text="2023" VerticalAlignment="Top" Width="40" TextAlignment="Center" TextChanged="TbYear_TextChanged"/>
 
+        </Grid>
+        <Grid x:Name="GRange" Visibility="Collapsed">
+            <DataGrid x:Name="DgOfTransactins" HorizontalAlignment="Center" IsReadOnly="True" Margin="0,65,0,0" VerticalAlignment="Top" Height="359" Width="512" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding adding_date}"/>
+                    <DataGridTextColumn Header="Тип" Binding="{Binding type}"/>
+                    <DataGridTextColumn Header="Категория" Binding="{Binding category}"/>
+                    <DataGridTextColumn Header="Сумма" Binding="{Binding price}"/>
+                    <DataGridTextColumn Header="Комментарий" Binding="{Binding comment}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="Удалить" HorizontalAlignment="Left" Height="21" Margin="356,31,0,0" VerticalAlignment="Top" Width="85" Click="Button_Click"/>
+            <DatePicker x:Name="dpStart" HorizontalAlignment="Left" Margin="13,32,0,0" VerticalAlignment="Top" SelectedDateChanged="Dp_SelectedDateChanged" IsTodayHighlighted="False" Height="23"/>
+            <DatePicker x:Name="dpEnd" HorizontalAlignment="Left" Margin="148,32,0,0" VerticalAlignment="Top" SelectedDateChanged="Dp_SelectedDateChanged" Height="23"/>
+        </Grid>
     </Grid>
 </Window>

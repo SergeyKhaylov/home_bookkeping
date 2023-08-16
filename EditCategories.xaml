@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homebookkeping"
-        mc:Ignorable="d" Height="430" Width="330" Loaded="Window_Loaded" Title="Категории">
+        mc:Ignorable="d" Height="430" Width="330" Loaded="Window_Loaded" Title="Категории" ResizeMode="NoResize">
     <Grid>
         <Grid x:Name="gShowCategory" Visibility="Visible">
             <Menu>
                 <MenuItem x:Name="miAdd" Header="Добавить" Click="MiAdd_Click"/>
                 <MenuItem x:Name="miDelete" Header="Удалить" Click="MiDelete_Click" />
+                <MenuItem x:Name="miUpdate" Header="Изменить" Click="MiUpdate_Click"/>
             </Menu>
             <DataGrid x:Name="dgCategories" AutoGenerateColumns="False" IsReadOnly="True" Margin="10,28,10,0">
                 <DataGrid.Columns>
@@ -30,7 +31,25 @@
             <TextBox x:Name="tbCategory" HorizontalAlignment="Left" Margin="165,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
             <Button x:Name="bApply" Content="Ok" HorizontalAlignment="Left" Margin="38,313,0,0" VerticalAlignment="Top" Height="25" Width="100" Click="bApply_Click" />
-            <Button x:Name="bCancel" Content="Отмена" HorizontalAlignment="Left" Margin="161,313,0,0" VerticalAlignment="Top" Height="25" Width="100" Click="BCancel_Click" />
+            <Button Content="Отмена" HorizontalAlignment="Left" Margin="161,313,0,0" VerticalAlignment="Top" Height="25" Width="100" Click="BCancel_Click" />
+            <Label HorizontalContentAlignment="Center" Content="Добавить категорию" HorizontalAlignment="Left" Margin="88,37,0,0" VerticalAlignment="Top" Width="137"/>
+
+        </Grid>
+        
+        <Grid x:Name="gChangeCategory" Visibility="Collapsed">
+
+            <!--<Label Content="Тип" HorizontalAlignment="Left" Margin="73,90,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="cbChangeType" HorizontalAlignment="Left" Margin="165,90,0,0" VerticalAlignment="Top" Width="120">
+                <TextBlock Text="Приход"/>
+                <TextBlock Text="Расход"/>
+            </ComboBox>-->
+
+            <Label Content="Название категории" HorizontalAlignment="Left" Margin="27,150,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="tbChangeCategory" HorizontalAlignment="Left" Margin="165,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+            <Button x:Name="bChangeApply" Content="Ok" HorizontalAlignment="Left" Margin="38,313,0,0" VerticalAlignment="Top" Height="25" Width="100" Click="bChangeApply_Click"/>
+            <Button  Content="Отмена" HorizontalAlignment="Left" Margin="161,313,0,0" VerticalAlignment="Top" Height="25" Width="100" Click="BCancel_Click" />
+            <Label HorizontalContentAlignment="Center" Content="Изменить категорию" HorizontalAlignment="Left" Margin="88,37,0,0" VerticalAlignment="Top" Width="137"/>
 
         </Grid>
     </Grid>

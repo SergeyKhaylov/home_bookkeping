@@ -18,6 +18,7 @@ namespace Homebookkeping
     public partial class EditCategories : Window
     {
         int _userId;
+        Category? _category;
         List<Category> _categories = new List<Category>();
         public EditCategories(int userID)
         {
@@ -31,7 +32,7 @@ namespace Homebookkeping
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                Category category = new Category()
+                Category category = new()
                 {
                     type = cbType.Text,
                     category_name = tbCategory.Text,
@@ -62,6 +63,7 @@ namespace Homebookkeping
         {
             gAddCategory.Visibility = Visibility.Collapsed;
             gShowCategory.Visibility = Visibility.Visible;
+            gChangeCategory.Visibility = Visibility.Collapsed;
         }
 
         private void MiDelete_Click(object sender, RoutedEventArgs e)
@@ -77,7 +79,6 @@ namespace Homebookkeping
                     _categories = db.categories.Where(c => c.user_id == _userId).OrderBy(c => c.type).ToList();
                     dgCategories.ItemsSource = _categories;
                 }
-
             }
         }
 
@@ -85,6 +86,7 @@ namespace Homebookkeping
         {
             gAddCategory.Visibility = Visibility.Visible;
             gShowCategory.Visibility = Visibility.Collapsed;
+            gChangeCategory.Visibility = Visibility.Collapsed;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -95,6 +97,37 @@ namespace Homebookkeping
                 _categories = db.categories.Where(c => c.user_id == _userId).OrderBy(c => c.type).ToList();
             }
             dgCategories.ItemsSource = _categories;
+        }
+
+        private void bChangeApply_Click(object sender, RoutedEventArgs e)
+        {
+            if (tbChangeCategory.Text.Length > 0)
+            {
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    _category.category_name = tbChangeCategory.Text;
+                    db.Attach(_category);
+                    db.Update(_category);
+                    db.SaveChanges();
+                    _categories = db.categories.Where(c => c.user_id == _userId).OrderBy(c => c.type).ToList();
+                    dgCategories.ItemsSource = _categories;
+                }
+                gAddCategory.Visibility = Visibility.Collapsed;
+                gShowCategory.Visibility = Visibility.Visible;
+                gChangeCategory.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void MiUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            _category = dgCategories.SelectedItem as Category;
+            if (_category != null)
+            {
+                gAddCategory.Visibility = Visibility.Collapsed;
+                gShowCategory.Visibility = Visibility.Collapsed;
+                gChangeCategory.Visibility = Visibility.Visible;
+                tbChangeCategory.Text = _category.category_name;
+            }
         }
     }
 }

@@ -28,43 +28,43 @@ namespace Homebookkeping
             cbTypeTransactions.SelectedIndex = 0;
             datePicker.Text = DateOnly.FromDateTime(DateTime.Now).ToString();
         }
+
         void updateCategory()
         {
-            using(ApplicationContext db = new ApplicationContext())
-            {
-                _incomeCategory.Clear();
-                _expenseCategory.Clear();
-                foreach (var c in db.categories.Where(c => c.user_id == _userId).ToList())
-                    if(c.type == "Приход")
-                        _incomeCategory.Add(c.category_name);
-                    else
-                        _expenseCategory.Add(c.category_name);
-            }
+            using ApplicationContext db = new();
+            _incomeCategory.Clear();
+            _expenseCategory.Clear();
+            foreach (var c in db.categories.Where(c => c.user_id == _userId).ToList())
+                if (c.type == "Приход")
+                {
+                    _incomeCategory.Add(c.category_name);
+                }
+                else
+                {
+                    _expenseCategory.Add(c.category_name);
+                }
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             if(double.TryParse(tbPrice.Text, out double priceValue))
             {
-                using (ApplicationContext db = new ApplicationContext())
+                using ApplicationContext db = new();
+                Transaction transaction = new()
                 {
+                    category_id = db.categories.Where(c => c.user_id == _userId && c.category_name == cbCategoryTransaction.Text).ToList()[0].id,
+                    price = priceValue,
+                    comment = tbComment.Text,
+                    adding_date = DateOnly.Parse(datePicker.Text),
+                    user_id = _userId
+                };
+                transaction.price = Math.Abs(transaction.price);
+                if (cbTypeTransactions.SelectedIndex == 1)
+                    transaction.price *= -1;
 
-                    Transaction transaction = new Transaction
-                    {
-                        type = cbTypeTransactions.Text,
-                        category_id = db.categories.Where(c => c.user_id == _userId && c.category_name == cbCategoryTransaction.Text).ToList()[0].id,
-                        price = priceValue,
-                        comment = tbComment.Text,
-                        adding_date = DateOnly.Parse(datePicker.Text),
-                        user_id = _userId
-                    };
-                    transaction.price = Math.Abs(transaction.price);
-                    if (cbTypeTransactions.SelectedIndex == 1)
-                        transaction.price *= -1;
-
-                    db.transactions.Add(transaction);
-                    db.SaveChanges();
-                }
+                db.transactions.Add(transaction);
+                db.SaveChanges();
+                
 
                 MessageBox.Show("Данные успешно введены");
                 Close();
